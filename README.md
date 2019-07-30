@@ -59,3 +59,7 @@ if ( lockPath != null )
 
 锁的所有逻辑都是在attempLock里面，如果加锁成功，会返回lockPath，否则返回的是null
 ```
+
+## redis实现分布式锁
++ 加锁：线程A 通过set key value nx px 30000 ，返回成功就创建了锁，线程B等待
++ 删除锁：通过lua脚本传入参数，执行del key value，删除自己的key对应的随机数
